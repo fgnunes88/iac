@@ -16,7 +16,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server" {
-  ami           = "ami-0c1b4dff690b5d229"
+  ami           = "ami-0ee3d9a8776e8b99c"
   instance_type = var.instancia
   key_name = var.chave
   
@@ -28,4 +28,10 @@ resource "aws_instance" "app_server" {
 resource "aws_key_pair" "deployer" {
   key_name   = var.chave
   public_key = file("${var.chave}.pub")
+}
+
+#Expõe o IP púlico da Instancia
+output "Public_IP" { 
+
+  value = aws_instance.app_server.public_ip
 }
